@@ -18,6 +18,12 @@ class HtmlToTextMixin(CreateSoupMixin):
         return soup.get_text()
 
 
+class ClearTextMixin(HtmlToTextMixin):
+    def clear_text(self):
+        text = self.html_to_text()
+        lines = [line.strip() for line in text.splitlines()]
+        clear_text = [phrase.strip() for line in lines for phrase in line.split(" ") if phrase]
+        return clear_text
 
 
 

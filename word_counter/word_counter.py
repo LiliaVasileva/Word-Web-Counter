@@ -1,4 +1,4 @@
-from mixin import CreateSoupMixin, ClearTextMixin, CountWordsMixin, HtmlToTextMixin
+from mixin.mixin import CreateSoupMixin, ClearTextMixin, CountWordsMixin, HtmlToTextMixin
 
 
 class WordWebCounter(CreateSoupMixin, HtmlToTextMixin, ClearTextMixin, CountWordsMixin):

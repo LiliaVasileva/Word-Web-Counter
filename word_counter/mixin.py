@@ -26,5 +26,14 @@ class ClearTextMixin(HtmlToTextMixin):
         return clear_text
 
 
-
+class CountWordsMixin(ClearTextMixin):
+    def count_words(self, word):
+        clear_text = self.clear_text()
+        count_word = 0
+        count_all_word = 0
+        for line in clear_text:
+            for w in re.findall(r"[\w']+", line):
+                count_all_word += 1
+                if w.lower() == word:
+                    count += 1
 

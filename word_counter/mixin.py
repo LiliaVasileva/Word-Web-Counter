@@ -10,7 +10,12 @@ class CreateSoupMixin(BeautifulSoup):
         return soup
 
 
-
+class HtmlToTextMixin(CreateSoupMixin):
+    def html_to_text(self):
+        soup = self.create_soup()
+        for script in soup(["script", "style"]):
+            script.extract()
+        return soup.get_text()
 
 
 

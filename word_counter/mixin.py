@@ -10,30 +10,28 @@ class CreateSoupMixin(BeautifulSoup):
         return soup
 
 
-class HtmlToTextMixin(CreateSoupMixin):
-    def html_to_text(self):
-        soup = self.create_soup()
+class HtmlToTextMixin():
+    def html_to_text(self, soup):
         for script in soup(["script", "style"]):
             script.extract()
         return soup.get_text()
 
 
-class ClearTextMixin(HtmlToTextMixin):
-    def clear_text(self):
-        text = self.html_to_text()
+class ClearTextMixin():
+    def clear_text(self, text):
         lines = [line.strip() for line in text.splitlines()]
         clear_text = [phrase.strip() for line in lines for phrase in line.split(" ") if phrase]
         return clear_text
 
 
-class CountWordsMixin(ClearTextMixin):
-    def count_words(self, word):
-        clear_text = self.clear_text()
+class CountWordsMixin():
+    def count_words(self, word, text):
         count_word = 0
         count_all_word = 0
-        for line in clear_text:
+        for line in text:
             for w in re.findall(r"[\w']+", line):
                 count_all_word += 1
                 if w.lower() == word:
-                    count += 1
+                    count_word += 1
+        return count_word, count_all_word
 

@@ -62,7 +62,7 @@ class WordWebCounter(CreateSoupMixin, HtmlToTextMixin, ClearTextMixin, CountWord
         return f'How many words and how many times the word - "{self.__word}" occur on the "{self.__url}".'
 
 
-
+# Test Code, please run this code to receive wanted output
 test = WordWebCounter('uniberg', 'https://uniberg.com/en/')
 print(test)
 print(test.report())

@@ -6,6 +6,10 @@ from urllib.request import urlopen
 class CreateSoupMixin(BeautifulSoup):
     """ create_soup() function is creating a BeautifulSoup object which represents the document as a nested data structure. """
     def create_soup(self, url):
+        try:
+            html = urlopen(url).read()
+        except:
+            raise Exception('Unable to load the url')
         html = urlopen(url).read()
         soup = BeautifulSoup(html, features="html.parser")
         return soup
